@@ -19,7 +19,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/new-morning-logo.jpeg",
+        "foregroundImage": "./assets/images/new-morning-logo.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.newmorning.mobile",
