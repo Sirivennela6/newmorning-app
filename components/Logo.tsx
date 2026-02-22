@@ -14,7 +14,7 @@ export function Logo({ size = 'medium', showText = true, light = false }: LogoPr
   return (
     <View style={styles.container}>
       <Image
-        source={require('../assets/images/new-morning-logo.jpeg')}
+        source={require('../assets/images/new-morning-logo.png')}
         style={[styles.logo, { width: logoSize, height: logoSize, borderRadius: logoSize / 2 }]}
         resizeMode="cover"
       />
