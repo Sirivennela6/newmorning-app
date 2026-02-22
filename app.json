@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "New Morning",
+    "slug": "new-morning-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/new-morning-logo.jpeg",
+    "scheme": "newmorning",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/images/new-morning-logo.jpeg",
+      "resizeMode": "contain",
+      "backgroundColor": "#FF6B35"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.newmorning.mobile",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/new-morning-logo.jpeg",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.newmorning.mobile",
+      "versionCode": 1,
+      "permissions": ["INTERNET", "ACCESS_NETWORK_STATE"],
+      "edgeToEdgeEnabled": true
+    },
+    "plugins": ["expo-router"],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": { "origin": false },
+      "eas": { "projectId": "9e460dc6-eabc-4e48-a8c6-6a4b869f4840" }
+    }
+  }
+}
