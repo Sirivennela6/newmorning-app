@@ -63,7 +63,6 @@ export default function SavedScreen() {
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <View style={styles.header}>
-        <Logo size="small" showText={true} />
         <Text style={styles.headerTitle}>Saved</Text>
       </View>
 
@@ -137,7 +136,7 @@ export default function SavedScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#FDF8F3' },
 header: {
-  paddingVertical: 14,
+  paddingVertical: 16,
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: '#FFF',

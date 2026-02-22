@@ -5,7 +5,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { api } from '../../utils/api';
 import { getCategoryIcon, getCategoryColor } from '../../utils/categoryHelpers';
-import { Logo } from '../../components/Logo';
 
 export default function CoursesScreen() {
   const router = useRouter();
@@ -42,12 +41,9 @@ export default function CoursesScreen() {
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      <View style={styles.header}>
-        <Logo size="small" />
-        <View>
-          <Text style={styles.headerTitle}>Categories</Text>
-        </View>
-      </View>
+  <View style={styles.header}>
+    <Text style={styles.headerTitle}>Categories</Text>
+  </View>
 
       {loading ? (
         <View style={styles.loadingContainer}><ActivityIndicator size="large" color="#FF6B35" /></View>
@@ -75,7 +71,7 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#FDF8F3' },
   loadingContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
  header: {
-  paddingVertical: 14,
+  paddingVertical: 16,
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: '#FFF',

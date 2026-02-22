@@ -7,7 +7,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useAuth } from '../../utils/authContext';
 import { api } from '../../utils/api';
-import { Logo } from '../../components/Logo';
 
 export default function ProfileScreen() {
   const router = useRouter();
@@ -43,7 +42,6 @@ export default function ProfileScreen() {
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View style={styles.header}>
-          <Logo size="small"/>
           <Text style={styles.headerTitle}>Profile</Text>
         </View>
 

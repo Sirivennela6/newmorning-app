@@ -17,7 +17,6 @@ import { Image } from 'expo-image';
 
 import { api } from '../../utils/api';
 import { getCategoryIcon, getCategoryColor } from '../../utils/categoryHelpers';
-import { Logo } from '../../components/Logo';
 
 const { width } = Dimensions.get('window');
 
@@ -55,7 +54,6 @@ export default function HomeScreen() {
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* ===== HEADER ===== */}
         <View style={styles.topBar}>
-          <Logo size="large" showText />
 
           <TouchableOpacity
             style={styles.profileIcon}
@@ -280,19 +278,19 @@ const styles = StyleSheet.create({
 
   /* ===== HEADER ===== */
   topBar: {
-    paddingTop: 24,
-    paddingBottom: 18,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FFF',
-    position: 'relative',
-  },
+  paddingVertical: 18,
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundColor: '#FFF',
+  position: 'relative',
+},
 
-  profileIcon: {
-    position: 'absolute',
-    right: 16,
-    top: 26,
-  },
+ profileIcon: {
+  position: 'absolute',
+  right: 18,
+  top: '50%',
+  marginTop: -17, // half of icon size (34 / 2)
+},
 
   /* ===== HERO ===== */
   hero: {
