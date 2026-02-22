@@ -45,7 +45,10 @@ export default function HomeScreen() {
 
   const handleSearch = () => {
     if (searchQuery.trim()) {
-      router.push('/(tabs)/courses');
+      router.push({
+        pathname: '/(tabs)/courses',
+        params: { search: searchQuery.trim() },
+      });
     }
   };
 
@@ -70,7 +73,7 @@ export default function HomeScreen() {
           >
             <Ionicons
               name="person-circle-outline"
-              size={34}
+              size={32}
               color="#64748B"
             />
           </TouchableOpacity>
@@ -79,8 +82,6 @@ export default function HomeScreen() {
         {/* ===== HERO ===== */}
         <LinearGradient
           colors={['#FF6B35', '#FFA94D', '#FFB84D']}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 1 }}
           style={styles.hero}
         >
           <Text style={styles.heroTitle}>Empowering You!</Text>
@@ -89,12 +90,7 @@ export default function HomeScreen() {
           </Text>
 
           <View style={styles.searchBar}>
-            <Ionicons
-              name="search"
-              size={20}
-              color="#94A3B8"
-              style={{ marginRight: 10 }}
-            />
+            <Ionicons name="search" size={20} color="#94A3B8" />
             <TextInput
               style={styles.searchInput}
               placeholder="Search courses..."
@@ -180,7 +176,10 @@ export default function HomeScreen() {
               </Text>
               <TouchableOpacity
                 onPress={() =>
-                  router.push('/(tabs)/courses')
+                  router.push({
+                    pathname: '/(tabs)/courses',
+                    params: { popular: 'true' },
+                  })
                 }
               >
                 <Text style={styles.seeAll}>
@@ -255,9 +254,32 @@ export default function HomeScreen() {
             <Text style={styles.ctaTitle}>
               Ready to Start?
             </Text>
+
             <Text style={styles.ctaSub}>
               Contact New Morning Foundation
             </Text>
+
+            <TouchableOpacity
+              style={styles.contactRow}
+              onPress={() => Linking.openURL('tel:+919845246017')}
+            >
+              <Ionicons name="call" size={18} color="#FFF" />
+              <Text style={styles.contactText}>
+                +91 98452 46017
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.contactRow}
+              onPress={() =>
+                Linking.openURL('mailto:newmorning0503@gmail.com')
+              }
+            >
+              <Ionicons name="mail" size={18} color="#FFF" />
+              <Text style={styles.contactText}>
+                newmorning0503@gmail.com
+              </Text>
+            </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.exploreBtn}
@@ -278,18 +300,15 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FDF8F3',
-  },
+  container: { flex: 1, backgroundColor: '#FDF8F3' },
 
-  /* ===== HEADER ===== */
   topBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingVertical: 18,
     backgroundColor: '#FFF',
     position: 'relative',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 
   centerLogo: {
@@ -297,10 +316,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  logo: {
-    width: 42,
-    height: 42,
+  profileIcon: {
+    position: 'absolute',
+    right: 18,
   },
+
+  logo: { width: 42, height: 42 },
 
   logoText: {
     fontSize: 22,
@@ -309,19 +330,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
 
-  profileIcon: {
-    position: 'absolute',
-    right: 18,
-    top: '50%',
-    marginTop: -17,
-  },
-
-  /* ===== HERO ===== */
-  hero: {
-    padding: 22,
-    paddingTop: 30,
-    paddingBottom: 28,
-  },
+  hero: { padding: 22 },
 
   heroTitle: {
     fontSize: 30,
@@ -333,11 +342,9 @@ const styles = StyleSheet.create({
 
   heroSub: {
     fontSize: 15,
-    color: 'rgba(255,255,255,0.95)',
+    color: '#FFF',
     textAlign: 'center',
     marginBottom: 24,
-    paddingHorizontal: 16,
-    lineHeight: 22,
   },
 
   searchBar: {
@@ -347,14 +354,9 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     paddingHorizontal: 16,
     height: 52,
-    elevation: 6,
   },
 
-  searchInput: {
-    flex: 1,
-    fontSize: 15,
-    color: '#1E293B',
-  },
+  searchInput: { flex: 1, marginLeft: 10 },
 
   searchBtn: {
     backgroundColor: '#FF6B35',
@@ -365,14 +367,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  section: {
-    padding: 16,
-  },
+  section: { padding: 16 },
 
   sectionHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
     marginBottom: 16,
   },
 
@@ -388,18 +387,13 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 
-  grid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 12,
-  },
+  grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
 
   catCard: {
     width: (width - 44) / 2,
     backgroundColor: '#FFF',
     borderRadius: 16,
     overflow: 'hidden',
-    elevation: 3,
   },
 
   catGradient: {
@@ -420,7 +414,6 @@ const styles = StyleSheet.create({
   catName: {
     fontSize: 14,
     fontWeight: '700',
-    color: '#1E293B',
     padding: 10,
     textAlign: 'center',
   },
@@ -430,14 +423,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     borderRadius: 16,
     marginRight: 14,
-    elevation: 3,
   },
 
   courseImg: {
     height: 150,
     width: '100%',
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
   },
 
   courseImgPlaceholder: {
@@ -446,23 +436,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  courseBody: {
-    padding: 14,
-  },
+  courseBody: { padding: 14 },
 
   courseCategory: {
     fontSize: 11,
     color: '#FF6B35',
     fontWeight: '700',
-    textTransform: 'uppercase',
     marginBottom: 5,
   },
 
   courseTitle: {
     fontSize: 15,
     fontWeight: '700',
-    color: '#1E293B',
-    lineHeight: 21,
   },
 
   courseFees: {
@@ -487,8 +472,21 @@ const styles = StyleSheet.create({
 
   ctaSub: {
     fontSize: 15,
-    color: 'rgba(255,255,255,0.9)',
+    color: '#FFF',
     marginBottom: 20,
+  },
+
+  contactRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
+    gap: 8,
+  },
+
+  contactText: {
+    color: '#FFF',
+    fontSize: 15,
+    fontWeight: '600',
   },
 
   exploreBtn: {
@@ -496,6 +494,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     paddingVertical: 13,
     borderRadius: 25,
+    marginTop: 18,
   },
 
   exploreBtnText: {

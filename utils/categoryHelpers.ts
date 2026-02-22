@@ -1,8 +1,15 @@
-// Category icon mapping from mockData.ts
+// Category icon mapping
+
 export const categoryIcons: { [key: string]: string } = {
+  'technical-skills': 'construct',
   'technical': 'construct',
+
   'computer-it': 'desktop',
+  'it-computer-science': 'laptop',
+  'computer-science': 'laptop',
+
   'beauty-wellness': 'sparkles',
+
   'hospitality': 'restaurant',
   'healthcare': 'medical',
   'agriculture': 'leaf',
@@ -10,7 +17,9 @@ export const categoryIcons: { [key: string]: string } = {
   'fashion-design': 'cut',
   'electrical': 'flash',
   'construction': 'business',
+
   'art-design': 'color-palette',
+
   'photography': 'camera',
   'music': 'musical-notes',
   'business': 'briefcase',
@@ -23,9 +32,15 @@ export const categoryIcons: { [key: string]: string } = {
 };
 
 export const categoryColors: { [key: string]: string } = {
+  'technical-skills': '#FF6B35',
   'technical': '#FF6B35',
+
   'computer-it': '#4299E1',
+  'it-computer-science': '#3182CE',
+  'computer-science': '#3182CE',
+
   'beauty-wellness': '#ED64A6',
+
   'hospitality': '#F6AD55',
   'healthcare': '#48BB78',
   'agriculture': '#68D391',
@@ -33,7 +48,9 @@ export const categoryColors: { [key: string]: string } = {
   'fashion-design': '#ED64A6',
   'electrical': '#ECC94B',
   'construction': '#DD6B20',
+
   'art-design': '#9F7AEA',
+
   'photography': '#4299E1',
   'music': '#805AD5',
   'business': '#4299E1',
@@ -45,12 +62,20 @@ export const categoryColors: { [key: string]: string } = {
   'fitness': '#F56565',
 };
 
+function normalizeCategoryName(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '');
+}
+
 export function getCategoryIcon(categoryName: string): string {
-  const categoryId = categoryName.toLowerCase().replace(/\s+/g, '-').replace(/&/g, '');
-  return categoryIcons[categoryId] || 'school';
+  const key = normalizeCategoryName(categoryName);
+  return categoryIcons[key] || 'school';
 }
 
 export function getCategoryColor(categoryName: string): string {
-  const categoryId = categoryName.toLowerCase().replace(/\s+/g, '-').replace(/&/g, '');
-  return categoryColors[categoryId] || '#FF6B35';
+  const key = normalizeCategoryName(categoryName);
+  return categoryColors[key] || '#FF6B35';
 }
