@@ -45,7 +45,6 @@ export default function SavedScreen() {
     return (
       <SafeAreaView style={styles.container} edges={['top']}>
         <View style={styles.header}>
-          <Logo size="small"/>
           <Text style={styles.headerTitle}>Saved</Text>
         </View>
         <View style={styles.centreContainer}>

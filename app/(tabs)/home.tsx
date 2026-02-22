@@ -8,12 +8,12 @@ import {
   TouchableOpacity,
   Dimensions,
   Linking,
+  Image,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
-import { Image } from 'expo-image';
 
 import { api } from '../../utils/api';
 import { getCategoryIcon, getCategoryColor } from '../../utils/categoryHelpers';
@@ -52,8 +52,17 @@ export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <ScrollView showsVerticalScrollIndicator={false}>
+
         {/* ===== HEADER ===== */}
         <View style={styles.topBar}>
+          <View style={styles.centerLogo}>
+            <Image
+              source={require('../../assets/images/new-morning-logo.png')}
+              style={styles.logo}
+              resizeMode="contain"
+            />
+            <Text style={styles.logoText}>New Morning</Text>
+          </View>
 
           <TouchableOpacity
             style={styles.profileIcon}
@@ -129,8 +138,7 @@ export default function HomeScreen() {
                   style={styles.catCard}
                   onPress={() =>
                     router.push({
-                      pathname:
-                        '/courses/category/[id]',
+                      pathname: '/courses/category/[id]',
                       params: {
                         id: cat.id,
                         name: cat.name,
@@ -195,10 +203,9 @@ export default function HomeScreen() {
                 >
                   {course.image_url ? (
                     <Image
-                      source={course.image_url}
+                      source={{ uri: course.image_url }}
                       style={styles.courseImg}
-                      contentFit="cover"
-                      transition={200}
+                      resizeMode="cover"
                     />
                   ) : (
                     <View
@@ -217,8 +224,7 @@ export default function HomeScreen() {
 
                   <View style={styles.courseBody}>
                     <Text style={styles.courseCategory}>
-                      {course.categories?.name ||
-                        'General'}
+                      {course.categories?.name || 'General'}
                     </Text>
 
                     <Text
@@ -265,6 +271,7 @@ export default function HomeScreen() {
             </TouchableOpacity>
           </LinearGradient>
         </View>
+
       </ScrollView>
     </SafeAreaView>
   );
@@ -278,19 +285,36 @@ const styles = StyleSheet.create({
 
   /* ===== HEADER ===== */
   topBar: {
-  paddingVertical: 18,
-  alignItems: 'center',
-  justifyContent: 'center',
-  backgroundColor: '#FFF',
-  position: 'relative',
-},
+    paddingVertical: 18,
+    backgroundColor: '#FFF',
+    position: 'relative',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 
- profileIcon: {
-  position: 'absolute',
-  right: 18,
-  top: '50%',
-  marginTop: -17, // half of icon size (34 / 2)
-},
+  centerLogo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  logo: {
+    width: 42,
+    height: 42,
+  },
+
+  logoText: {
+    fontSize: 22,
+    fontWeight: '800',
+    color: '#FF6B35',
+    marginLeft: 10,
+  },
+
+  profileIcon: {
+    position: 'absolute',
+    right: 18,
+    top: '50%',
+    marginTop: -17,
+  },
 
   /* ===== HERO ===== */
   hero: {
@@ -341,7 +365,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  /* ===== SECTION ===== */
   section: {
     padding: 16,
   },
@@ -365,7 +388,6 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 
-  /* ===== CATEGORY GRID ===== */
   grid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -403,7 +425,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  /* ===== COURSE CARDS ===== */
   courseCard: {
     width: 260,
     backgroundColor: '#FFF',
@@ -451,7 +472,6 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
 
-  /* ===== CTA ===== */
   ctaCard: {
     borderRadius: 20,
     padding: 28,
