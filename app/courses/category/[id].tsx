@@ -67,12 +67,14 @@ export default function CategoryCoursesScreen() {
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
-          <Ionicons name="arrow-back" size={24} color="#1E293B" />
-        </TouchableOpacity>
-        <Logo size="small" showText={false} />
-        <Text style={styles.headerTitle} numberOfLines={1}>{categoryName || 'Courses'}</Text>
-      </View>
+  <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
+    <Ionicons name="arrow-back" size={24} color="#1E293B" />
+  </TouchableOpacity>
+
+  <Text style={styles.headerTitle} numberOfLines={1}>
+    {categoryName || 'Courses'}
+  </Text>
+</View>
 
       {loading ? (
         <View style={styles.loadingContainer}>
@@ -110,10 +112,22 @@ export default function CategoryCoursesScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#FDF8F3' },
   loadingContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  header: { flexDirection: 'row', alignItems: 'center', padding: 16, backgroundColor: '#FFF', borderBottomWidth: 1, borderBottomColor: '#F1F5F9', gap: 12 },
-  backBtn: { padding: 2 },
-  headerTitle: { flex: 1, fontSize: 19, fontWeight: '800', color: '#1E293B' },
-  resultsBanner: { paddingHorizontal: 20, paddingVertical: 10, borderBottomWidth: 1, borderBottomColor: '#F1F5F9', backgroundColor: '#FFF' },
+header: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  paddingHorizontal: 16,
+  paddingVertical: 14,
+  backgroundColor: '#FFF',
+  borderBottomWidth: 1,
+  borderBottomColor: '#F1F5F9',
+},  backBtn: { padding: 2 },
+headerTitle: {
+  flex: 1,
+  fontSize: 22,
+  fontWeight: '800',
+  color: '#1E293B',
+  marginLeft: 12,
+},  resultsBanner: { paddingHorizontal: 20, paddingVertical: 10, borderBottomWidth: 1, borderBottomColor: '#F1F5F9', backgroundColor: '#FFF' },
   resultsText: { fontSize: 13, color: '#64748B', fontWeight: '500' },
   list: { padding: 16, paddingBottom: 32 },
   card: { flexDirection: 'row', backgroundColor: '#FFF', borderRadius: 16, marginBottom: 14, overflow: 'hidden', elevation: 2, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.07, shadowRadius: 6, alignItems: 'center' },
