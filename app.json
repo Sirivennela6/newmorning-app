@@ -4,12 +4,11 @@
     "slug": "new-morning-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/new-morning-logo.jpeg",
+    "icon": "./assets/images/new-morning-logo.png",
     "scheme": "newmorning",
     "userInterfaceStyle": "light",
-    "newArchEnabled": true,
     "splash": {
-      "image": "./assets/images/new-morning-logo.jpeg",
+      "image": "./assets/images/new-morning-logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#FF6B35"
     },
@@ -25,16 +24,25 @@
       },
       "package": "com.newmorning.mobile",
       "versionCode": 1,
-      "permissions": ["INTERNET", "ACCESS_NETWORK_STATE"],
-      "edgeToEdgeEnabled": true
+      "permissions": [
+        "INTERNET",
+        "ACCESS_NETWORK_STATE"
+      ]
     },
-    "plugins": ["expo-router"],
+    "plugins": [
+      "expo-router",
+      "expo-font"
+    ],
     "experiments": {
       "typedRoutes": true
     },
     "extra": {
-      "router": { "origin": false },
-      "eas": { "projectId": "9e460dc6-eabc-4e48-a8c6-6a4b869f4840" }
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "9e460dc6-eabc-4e48-a8c6-6a4b869f4840"
+      }
     }
   }
 }
