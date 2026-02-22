@@ -1,8 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import {
   View, Text, StyleSheet, FlatList, TouchableOpacity,
-  Image, ActivityIndicator,
+  ActivityIndicator,
 } from 'react-native';
+import { Image } from 'expo-image';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter, useFocusEffect } from 'expo-router';
@@ -44,7 +45,7 @@ export default function SavedScreen() {
     return (
       <SafeAreaView style={styles.container} edges={['top']}>
         <View style={styles.header}>
-          <Logo size="small" showText={true} />
+          <Logo size="small"/>
           <Text style={styles.headerTitle}>Saved</Text>
         </View>
         <View style={styles.centreContainer}>
@@ -83,7 +84,12 @@ export default function SavedScreen() {
               onPress={() => router.push(`/course/${item.id}`)}
             >
               {item.image_url ? (
-                <Image source={{ uri: item.image_url }} style={styles.cardImage} resizeMode="cover" />
+                <Image
+            source={item.image_url}
+            style={styles.cardImage}
+            contentFit="cover"
+            transition={200}
+/>
               ) : (
                 <View style={[styles.cardImage, styles.cardImagePlaceholder]}>
                   <Ionicons name="school" size={30} color="#FF6B35" />
@@ -130,8 +136,14 @@ export default function SavedScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#FDF8F3' },
-  header: { flexDirection: 'row', alignItems: 'center', gap: 14, padding: 16, backgroundColor: '#FFF', borderBottomWidth: 1, borderBottomColor: '#F1F5F9' },
-  headerTitle: { fontSize: 26, fontWeight: '800', color: '#1E293B' },
+header: {
+  paddingVertical: 14,
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundColor: '#FFF',
+  borderBottomWidth: 1,
+  borderBottomColor: '#F1F5F9',
+},  headerTitle: { fontSize: 26, fontWeight: '800', color: '#1E293B' },
   list: { padding: 16, paddingBottom: 32 },
   card: { flexDirection: 'row', backgroundColor: '#FFF', borderRadius: 16, marginBottom: 14, overflow: 'hidden', elevation: 2, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.07, shadowRadius: 6 },
   cardImage: { width: 100, height: 100 },

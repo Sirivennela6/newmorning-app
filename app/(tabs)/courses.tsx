@@ -43,10 +43,9 @@ export default function CoursesScreen() {
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <View style={styles.header}>
-        <Logo size="small" showText={true} />
+        <Logo size="small" />
         <View>
           <Text style={styles.headerTitle}>Categories</Text>
-          <Text style={styles.headerSubtitle}>Choose a category to explore courses</Text>
         </View>
       </View>
 
@@ -75,7 +74,18 @@ export default function CoursesScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#FDF8F3' },
   loadingContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  header: { padding: 16, backgroundColor: '#FFF', borderBottomWidth: 1, borderBottomColor: '#F1F5F9', flexDirection: 'row', alignItems: 'center', gap: 16 },
+ header: {
+  paddingVertical: 14,
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundColor: '#FFF',
+  borderBottomWidth: 1,
+  borderBottomColor: '#F1F5F9',
+  shadowColor: '#000',
+  shadowOpacity: 0.03,
+  shadowRadius: 4,
+  elevation: 2,
+},
   headerTitle: { fontSize: 22, fontWeight: '800', color: '#1E293B' },
   headerSubtitle: { fontSize: 13, color: '#64748B' },
   list: { padding: 16 },

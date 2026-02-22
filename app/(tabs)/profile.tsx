@@ -43,7 +43,7 @@ export default function ProfileScreen() {
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View style={styles.header}>
-          <Logo size="small" showText={true} />
+          <Logo size="small"/>
           <Text style={styles.headerTitle}>Profile</Text>
         </View>
 

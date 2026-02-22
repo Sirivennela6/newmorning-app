@@ -6,11 +6,12 @@ import {
   FlatList,
   TouchableOpacity,
   ActivityIndicator,
-  Image,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter, useLocalSearchParams } from 'expo-router';
+import { Image } from 'expo-image';
+
 import { api } from '../../../utils/api';
 
 export default function CategoryCoursesScreen() {
@@ -41,53 +42,55 @@ export default function CategoryCoursesScreen() {
   const renderCourse = ({ item }: { item: any }) => (
     <TouchableOpacity
       style={styles.card}
+      activeOpacity={0.85}
       onPress={() => router.push(`/course/${item.id}`)}
     >
       {item.image_url ? (
         <Image
-          source={{ uri: item.image_url }}
+          source={item.image_url}
           style={styles.cardImage}
-          resizeMode="cover"
+          contentFit="cover"
+          transition={200}
         />
       ) : (
         <View style={[styles.cardImage, styles.imagePlaceholder]}>
-          <Ionicons name="school" size={32} color="#FF6B35" />
+          <Ionicons name="school" size={28} color="#FF6B35" />
         </View>
       )}
 
       <View style={styles.cardBody}>
-        {item.sub_category ? (
+        {item.sub_category && (
           <Text style={styles.subCat}>{item.sub_category}</Text>
-        ) : null}
+        )}
 
         <Text style={styles.cardTitle} numberOfLines={2}>
           {item.name}
         </Text>
 
-        <View style={styles.chipRow}>
-          {item.duration ? (
-            <View style={styles.chip}>
+        <View style={styles.metaRow}>
+          {item.duration && (
+            <View style={styles.metaChip}>
               <Ionicons name="time-outline" size={12} color="#64748B" />
-              <Text style={styles.chipText}>{item.duration}</Text>
+              <Text style={styles.metaText}>{item.duration}</Text>
             </View>
-          ) : null}
+          )}
 
-          {item.eligibility ? (
-            <View style={styles.chip}>
+          {item.eligibility && (
+            <View style={styles.metaChip}>
               <Ionicons name="school-outline" size={12} color="#64748B" />
-              <Text style={styles.chipText}>{item.eligibility}</Text>
+              <Text style={styles.metaText}>{item.eligibility}</Text>
             </View>
-          ) : null}
+          )}
         </View>
 
-        {item.fees ? (
+        {item.fees && (
           <Text style={styles.feesText}>{item.fees}</Text>
-        ) : null}
+        )}
       </View>
 
       <Ionicons
         name="chevron-forward"
-        size={20}
+        size={18}
         color="#CBD5E1"
         style={styles.chevron}
       />
@@ -98,20 +101,14 @@ export default function CategoryCoursesScreen() {
     <SafeAreaView style={styles.container} edges={['top']}>
       {/* ===== HEADER ===== */}
       <View style={styles.header}>
-        <TouchableOpacity
-          onPress={() => router.back()}
-          style={styles.backBtn}
-        >
+        <TouchableOpacity onPress={() => router.back()}>
           <Ionicons name="arrow-back" size={24} color="#1E293B" />
         </TouchableOpacity>
 
-        <View style={styles.headerCenter}>
-          <Text style={styles.headerTitle} numberOfLines={1}>
-            {categoryName || 'Courses'}
-          </Text>
-        </View>
+        <Text style={styles.headerTitle} numberOfLines={1}>
+          {categoryName || 'Courses'}
+        </Text>
 
-        {/* Spacer to keep title centered */}
         <View style={{ width: 24 }} />
       </View>
 
@@ -135,13 +132,13 @@ export default function CategoryCoursesScreen() {
             keyExtractor={(item) => item.id}
             contentContainerStyle={styles.list}
             showsVerticalScrollIndicator={false}
-            onRefresh={loadCourses}
             refreshing={loading}
+            onRefresh={loadCourses}
             ListEmptyComponent={
               <View style={styles.emptyContainer}>
                 <Ionicons
                   name="search-outline"
-                  size={64}
+                  size={60}
                   color="#CBD5E1"
                 />
                 <Text style={styles.emptyTitle}>No courses yet</Text>
@@ -174,24 +171,17 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
     paddingHorizontal: 16,
-    paddingVertical: 14,
+    paddingVertical: 12,
     backgroundColor: '#FFF',
     borderBottomWidth: 1,
     borderBottomColor: '#F1F5F9',
-  },
-
-  backBtn: {
-    width: 24,
-  },
-
-  headerCenter: {
-    flex: 1,
-    alignItems: 'center',
+    elevation: 2,
   },
 
   headerTitle: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: '800',
     color: '#1E293B',
   },
@@ -199,11 +189,11 @@ const styles = StyleSheet.create({
   /* ===== RESULTS ===== */
 
   resultsBanner: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
     paddingVertical: 10,
+    backgroundColor: '#FFF',
     borderBottomWidth: 1,
     borderBottomColor: '#F1F5F9',
-    backgroundColor: '#FFF',
   },
 
   resultsText: {
@@ -214,28 +204,24 @@ const styles = StyleSheet.create({
 
   list: {
     padding: 16,
-    paddingBottom: 32,
+    paddingBottom: 28,
   },
 
-  /* ===== COURSE CARD ===== */
+  /* ===== CARD ===== */
 
   card: {
     flexDirection: 'row',
     backgroundColor: '#FFF',
-    borderRadius: 16,
-    marginBottom: 14,
+    borderRadius: 14,
+    marginBottom: 12,
     overflow: 'hidden',
     elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.07,
-    shadowRadius: 6,
     alignItems: 'center',
   },
 
   cardImage: {
-    width: 100,
-    height: 110,
+    width: 90,
+    height: 95,
   },
 
   imagePlaceholder: {
@@ -246,15 +232,15 @@ const styles = StyleSheet.create({
 
   cardBody: {
     flex: 1,
-    padding: 14,
+    paddingVertical: 12,
+    paddingHorizontal: 12,
   },
 
   subCat: {
-    fontSize: 11,
+    fontSize: 10,
     color: '#FF6B35',
     fontWeight: '700',
     textTransform: 'uppercase',
-    letterSpacing: 0.3,
     marginBottom: 4,
   },
 
@@ -262,18 +248,17 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '700',
     color: '#1E293B',
-    lineHeight: 21,
-    marginBottom: 8,
+    lineHeight: 20,
+    marginBottom: 6,
   },
 
-  chipRow: {
+  metaRow: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
     gap: 6,
     marginBottom: 4,
   },
 
-  chip: {
+  metaChip: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
@@ -283,10 +268,9 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
 
-  chipText: {
+  metaText: {
     fontSize: 11,
     color: '#64748B',
-    fontWeight: '500',
   },
 
   feesText: {
@@ -300,26 +284,25 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
 
-  /* ===== EMPTY STATE ===== */
+  /* ===== EMPTY ===== */
 
   emptyContainer: {
     alignItems: 'center',
-    paddingVertical: 64,
-    paddingHorizontal: 32,
+    paddingVertical: 60,
+    paddingHorizontal: 30,
   },
 
   emptyTitle: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: '700',
     color: '#1E293B',
-    marginTop: 16,
+    marginTop: 14,
   },
 
   emptySubtitle: {
     fontSize: 14,
     color: '#64748B',
-    marginTop: 8,
+    marginTop: 6,
     textAlign: 'center',
-    lineHeight: 20,
   },
 });
