@@ -9,7 +9,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter, useFocusEffect } from 'expo-router';
 import { useAuth } from '../../utils/authContext';
 import { api } from '../../utils/api';
-import { Logo } from '../../components/Logo';
 
 export default function SavedScreen() {
   const router = useRouter();
@@ -83,10 +82,11 @@ export default function SavedScreen() {
             >
               {item.image_url ? (
                 <Image
-            source={item.image_url}
-            style={styles.cardImage}
-            contentFit="cover"
-            transition={200}
+  source={{ uri: item.image_url }}
+  style={styles.courseImage}
+  contentFit="cover"
+  transition={300}
+  cachePolicy="memory-disk"
 />
               ) : (
                 <View style={[styles.cardImage, styles.cardImagePlaceholder]}>

@@ -135,7 +135,7 @@ const renderCourse = ({ item }: any) => (
        source={{ uri: item.image_url }}
         style={styles.courseImage}
         contentFit="cover"
-        transition={200}
+        transition={300}
         cachePolicy="memory-disk"
       />
     ) : (

@@ -47,11 +47,12 @@ export default function CategoryCoursesScreen() {
     >
       {item.image_url ? (
         <Image
-          source={item.image_url}
-          style={styles.cardImage}
-          contentFit="cover"
-          transition={200}
-        />
+  source={{ uri: item.image_url }}
+  style={styles.courseImage}
+  contentFit="cover"
+  transition={300}
+  cachePolicy="memory-disk"
+/>
       ) : (
         <View style={[styles.cardImage, styles.imagePlaceholder]}>
           <Ionicons name="school" size={28} color="#FF6B35" />

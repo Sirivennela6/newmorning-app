@@ -54,7 +54,7 @@ export default function AdminLoginScreen() {
               <Ionicons name="shield-checkmark" size={56} color="#FF6B35" />
             </View>
             <Text style={styles.headerTitle}>Admin Access</Text>
-            <Text style={styles.headerSub}>New Morning Foundation</Text>
+            <Text style={styles.headerSub}>NewMorning Foundation</Text>
           </LinearGradient>
 
           <View style={styles.form}>

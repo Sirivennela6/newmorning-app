@@ -118,10 +118,12 @@ export default function CourseDetailScreen() {
         {/* Course Image */}
         {course.image_url ? (
           <Image
-            source={{ uri: course.image_url }}
-            style={styles.courseImage}
-            resizeMode="cover"
-          />
+  source={{ uri: item.image_url }}
+  style={styles.courseImage}
+  contentFit="cover"
+  transition={300}
+  cachePolicy="memory-disk"
+/>
         ) : (
           <View style={styles.courseImagePlaceholder}>
             <Ionicons name="school" size={80} color="#FF6B35" />

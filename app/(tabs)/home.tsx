@@ -8,8 +8,8 @@ import {
   TouchableOpacity,
   Dimensions,
   Linking,
-  Image,
 } from 'react-native';
+import { Image } from 'expo-image';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -60,11 +60,13 @@ export default function HomeScreen() {
         <View style={styles.topBar}>
           <View style={styles.centerLogo}>
             <Image
-              source={require('../../assets/images/new-morning-logo.png')}
-              style={styles.logo}
-              resizeMode="contain"
-            />
-            <Text style={styles.logoText}>New Morning</Text>
+  source={{ uri: item.image_url }}
+  style={styles.courseImage}
+  contentFit="cover"
+  transition={300}
+  cachePolicy="memory-disk"
+/>
+            <Text style={styles.logoText}>NewMorning</Text>
           </View>
 
           <TouchableOpacity
