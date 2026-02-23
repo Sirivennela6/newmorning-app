@@ -7,14 +7,11 @@ export default function RootLayout() {
   return (
     <SafeAreaProvider>
       <AuthProvider>
-        <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="splash" options={{ headerShown: false }} />
-          <Stack.Screen name="index" />
+        <Stack  screenOptions={{ headerShown: false }}>
           <Stack.Screen name="(tabs)" />
           <Stack.Screen name="course/[id]" />
           <Stack.Screen name="courses/category/[id]" />
           <Stack.Screen name="auth/login" />
-          <Stack.Screen name="auth/signup" />
           <Stack.Screen name="auth/admin-login" />
           <Stack.Screen name="admin/index" />
         </Stack>

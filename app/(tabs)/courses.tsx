@@ -130,15 +130,15 @@ const renderCourse = ({ item }: any) => (
     style={styles.courseCard}
     onPress={() => router.push(`/course/${item.id}`)}
   >
-    {item.image_url ? (
-      <Image
-       source={{ uri: item.image_url }}
-        style={styles.courseImage}
-        contentFit="cover"
-        transition={300}
-        cachePolicy="memory-disk"
-      />
-    ) : (
+    {course.image_url ? (
+  <Image
+    source={{ uri: course.image_url }}
+    style={styles.courseImage}
+    contentFit="cover"
+    transition={300}
+    cachePolicy="memory-disk"
+  />
+) : (
       <View style={[styles.courseImage, styles.placeholder]}>
         <Ionicons name="school" size={28} color="#FF6B35" />
       </View>

@@ -60,7 +60,7 @@ export default function HomeScreen() {
         <View style={styles.topBar}>
           <View style={styles.centerLogo}>
             <Image
-  source={{ uri: item.image_url }}
+  source={{ uri: course.image_url }}
   style={styles.courseImage}
   contentFit="cover"
   transition={300}

@@ -124,6 +124,7 @@ export default function CourseDetailScreen() {
   transition={300}
   cachePolicy="memory-disk"
 />
+        
         ) : (
           <View style={styles.courseImagePlaceholder}>
             <Ionicons name="school" size={80} color="#FF6B35" />
