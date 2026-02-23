@@ -1,9 +1,11 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 
-// 4 tabs exactly as in original design
 export default function TabLayout() {
+  const router = useRouter(); // 👈 ADD THIS HERE
+
   return (
     <Tabs
       screenOptions={{
@@ -29,34 +31,43 @@ export default function TabLayout() {
         name="home"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({ color }) => (
             <Ionicons name="home" size={26} color={color} />
           ),
         }}
       />
+
       <Tabs.Screen
         name="courses"
         options={{
           title: 'Courses',
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({ color }) => (
             <Ionicons name="folder-open" size={26} color={color} />
           ),
         }}
+        listeners={{
+          tabPress: (e) => {
+            e.preventDefault();
+            router.replace('/(tabs)/courses'); // 👈 now router works
+          },
+        }}
       />
+
       <Tabs.Screen
         name="saved"
         options={{
           title: 'Saved',
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({ color }) => (
             <Ionicons name="bookmark" size={26} color={color} />
           ),
         }}
       />
+
       <Tabs.Screen
         name="profile"
         options={{
           title: 'Profile',
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({ color }) => (
             <Ionicons name="person" size={26} color={color} />
           ),
         }}

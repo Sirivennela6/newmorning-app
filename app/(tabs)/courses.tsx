@@ -12,6 +12,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { api } from '../../utils/api';
 import { getCategoryIcon, getCategoryColor } from '../../utils/categoryHelpers';
+import { Image } from 'expo-image'; 
 
 export default function CoursesScreen() {
   const router = useRouter();
@@ -122,29 +123,64 @@ export default function CoursesScreen() {
   };
 
   /* ===== RENDER COURSE ===== */
-  const renderCourse = ({ item }: any) => (
-    <TouchableOpacity
-      style={styles.card}
-      onPress={() => router.push(`/course/${item.id}`)}
-    >
-      <Ionicons name="school" size={28} color="#FF6B35" />
-      <Text style={styles.title}>{item.name}</Text>
-    </TouchableOpacity>
-  );
+  // make sure this is imported
 
+const renderCourse = ({ item }: any) => (
+  <TouchableOpacity
+    style={styles.courseCard}
+    onPress={() => router.push(`/course/${item.id}`)}
+  >
+    {item.image_url ? (
+      <Image
+       source={{ uri: item.image_url }}
+        style={styles.courseImage}
+        contentFit="cover"
+        transition={200}
+        cachePolicy="memory-disk"
+      />
+    ) : (
+      <View style={[styles.courseImage, styles.placeholder]}>
+        <Ionicons name="school" size={28} color="#FF6B35" />
+      </View>
+    )}
+
+    <View style={styles.courseBody}>
+      <Text style={styles.courseTitle} numberOfLines={2}>
+        {item.name}
+      </Text>
+
+      {item.fees && (
+        <Text style={styles.courseFees}>{item.fees}</Text>
+      )}
+    </View>
+  </TouchableOpacity>
+);
   const isCourseMode = searchQuery || showPopular;
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>
-          {searchQuery
-            ? `Results for "${searchQuery}"`
-            : showPopular
-            ? 'Popular Courses'
-            : 'Categories'}
-        </Text>
-      </View>
+     <View style={styles.header}>
+  {(searchQuery || showPopular) && (
+    <TouchableOpacity
+      style={styles.backBtn}
+      onPress={() => router.back()}
+    >
+      <Ionicons name="arrow-back" size={24} color="#1E293B" />
+    </TouchableOpacity>
+  )}
+
+  <Text style={styles.headerTitle}>
+    {searchQuery
+      ? `Results for "${searchQuery}"`
+      : showPopular
+      ? 'Popular Courses'
+      : 'Categories'}
+  </Text>
+
+  {(searchQuery || showPopular) && (
+    <View style={{ width: 24 }} />
+  )}
+</View>
 
       {loading ? (
         <View style={styles.loadingContainer}>
@@ -171,10 +207,24 @@ export default function CoursesScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#FDF8F3' },
 
+  backBtn: {
+  position: 'absolute',
+  left: 16,
+},
+
+header: {
+  paddingVertical: 16,
+  backgroundColor: '#FFF',
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderBottomWidth: 1,
+  borderBottomColor: '#F1F5F9',
+},
   header: {
     padding: 16,
     backgroundColor: '#FFF',
     alignItems: 'center',
+    justifyContent:'center',
     borderBottomWidth: 1,
     borderBottomColor: '#F1F5F9',
   },
@@ -217,4 +267,38 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: '#64748B',
   },
+  courseCard: {
+  backgroundColor: '#FFF',
+  borderRadius: 14,
+  marginBottom: 14,
+  overflow: 'hidden',
+},
+
+courseImage: {
+  height: 140,
+  width: '100%',
+},
+
+placeholder: {
+  backgroundColor: '#FFF5F0',
+  justifyContent: 'center',
+  alignItems: 'center',
+},
+
+courseBody: {
+  padding: 14,
+},
+
+courseTitle: {
+  fontSize: 15,
+  fontWeight: '700',
+  color: '#1E293B',
+},
+
+courseFees: {
+  fontSize: 13,
+  fontWeight: '700',
+  color: '#FF6B35',
+  marginTop: 6,
+},
 });
