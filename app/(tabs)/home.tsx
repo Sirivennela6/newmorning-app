@@ -59,15 +59,13 @@ export default function HomeScreen() {
         {/* ===== HEADER ===== */}
         <View style={styles.topBar}>
           <View style={styles.centerLogo}>
-            <Image
-  source={{ uri: course.image_url }}
-  style={styles.courseImage}
-  contentFit="cover"
-  transition={300}
-  cachePolicy="memory-disk"
-/>
-            <Text style={styles.logoText}>NewMorning</Text>
-          </View>
+  <Image
+    source={require('../../assets/images/new-morning-logo.png')}
+    style={styles.logo}
+    contentFit="cover"
+  />
+  <Text style={styles.logoText}>NewMorning</Text>
+</View>
 
           <TouchableOpacity
             style={styles.profileIcon}
